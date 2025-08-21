@@ -30,26 +30,37 @@ const ROW_B: Tech[] = [
   { name: "GraphQL", icon: SiGraphql },
 ];
 
+
 function Track({ items, reverse }: { items: Tech[]; reverse?: boolean }) {
   const content = useMemo(() => [...items, ...items], [items]);
   return (
     <div className="relative flex overflow-hidden">
-      <div className={`flex min-w-max items-center gap-8 py-4 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+      <div
+        className={`flex min-w-max items-center gap-8 py-4 ${
+          reverse ? "animate-marquee-reverse" : "animate-marquee"
+        }`}
+      >
         {content.map((t, i) => {
           const Icon = t.icon;
           return (
-            <span key={`${t.name}-${i}`} className="inline-flex items-center gap-3">
-              <Icon className="h-6 w-6 opacity-90" />
-              <span className="text-sm opacity-80">{t.name}</span>
-            </span>
+            <div
+              key={`${t.name}-${i}`} // ✅ moved key here
+              className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-3 py-2 rounded-3xl flex items-center justify-center"
+            >
+              <span className="inline-flex items-center gap-3">
+                <Icon className="h-6 w-6 opacity-90" />
+                <span className="text-sm opacity-80">{t.name}</span>
+              </span>
+            </div>
           );
         })}
       </div>
-      <div className={`pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white/100 to-transparent dark:from-black/100`}></div>
-      <div className={`pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white/100 to-transparent dark:from-black/100`}></div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white/100 to-transparent dark:from-black/100"></div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white/100 to-transparent dark:from-black/100"></div>
     </div>
   );
 }
+
 
 export default function TechMarquee() {
   return (

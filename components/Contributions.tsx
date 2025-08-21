@@ -25,8 +25,7 @@ export default function Contributions({ username }: { username: string }) {
   const weeks: { days: Day[] }[] = data?.contributions?.[0]?.weeks ?? [];
 
   return (
-    <div className="rounded-lg border p-4">
-      <div className="mb-3 text-sm font-medium">GitHub Contributions ({year})</div>
+    <div className="rounded-lg border p-4 bg-white dark:bg-black">
       <div className="grid grid-flow-col auto-cols-max gap-1">
         {weeks.map((week: { days: Day[] }, wi: number) => (
           <div key={wi} className="grid grid-rows-7 gap-1">

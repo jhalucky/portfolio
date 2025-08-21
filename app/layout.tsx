@@ -32,8 +32,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-white dark:bg-black text-neutral-900 dark:text-neutral-100`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased min-h-screen`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <ThemeSync />
           {children}
         </ThemeProvider>
