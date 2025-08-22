@@ -15,7 +15,7 @@ async function fetcher(url: string) {
 export default function Contributions({ username }: { username: string }) {
   const year = new Date().getFullYear();
   const { data, error, isLoading } = useSWR(
-    `https://github-contributions-api.jogruber.de/v4/jhalucky?y=${}`,
+    `https://github-contributions-api.jogruber.de/v4/jhalucky?y=${year}`,
     fetcher
   );
 
