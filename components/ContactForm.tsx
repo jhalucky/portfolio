@@ -12,7 +12,7 @@ export default function ContactForm() {
   const [loading, setLoading] = useState(false);
   // const navigate = useNavigate();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const confirmed = window.confirm("Do you really want to send the message?");
     if (!confirmed) return;
