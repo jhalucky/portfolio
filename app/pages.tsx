@@ -9,6 +9,7 @@ import Blogs from "@/components/Blogs";
 
 export default function Home() {
   return (
+    
     <div className="min-h-screen">
       <Navbar />
       <main className="mx-auto max-w-5xl space-y-20 px-6 py-10 sm:px-8">
@@ -45,7 +46,7 @@ export default function Home() {
           <h2 className="text-xl font-semibold">Tools & Tech Stack</h2>
           <TechMarquee />
         </section>
-
+        
         {/* Projects */}
         <section className="space-y-6" id="projects">
           <Projects />
@@ -55,6 +56,7 @@ export default function Home() {
         <section className="space-y-3" id="blogs">
           <Blogs />
         </section>
+        
 
         {/* GitHub Calendar (no heading) */}
         <section>
@@ -69,5 +71,6 @@ export default function Home() {
       </main>
       <Footer />
     </div>
+    
   );
 }

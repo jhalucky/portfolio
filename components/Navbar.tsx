@@ -27,7 +27,7 @@ export default function Navbar() {
         </Link>
         <nav className="flex items-center gap-6 text-sm">
           <Link href="#home" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Home</Link>
-          <Link href="#about" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">About</Link>
+          <Link href="#projects" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Projects</Link>
           <Link href="#blogs" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Blogs</Link>
           <button
             aria-label="Toggle theme"

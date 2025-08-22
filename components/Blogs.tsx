@@ -9,6 +9,7 @@ export default function Blogs() {
               className="inset-0 p-[1px] rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"
             >
              <article className="relative rounded-lg p-5 bg-[var(--card-bg)] text-[var(--page-fg)]">
+
                 <h3 className="text-base font-semibold">Blog post title {i}</h3>
                 <p className="mt-2 text-sm text-foreground/80">
                   A short teaser for the blog post. Coming soon.
