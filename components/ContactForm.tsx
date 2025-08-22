@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -10,7 +10,7 @@ export default function ContactForm() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  // const navigate = useNavigate();
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ export default function ContactForm() {
         setPhone("");
         setSubject("");
         setMessage("");
-        setTimeout(() => alert("Thankyou for messaging!"), 1000);
+        setSubmitted(true); // ✅ Show thank-you message
       } else {
         toast.error("Failed to send message.");
       }
@@ -54,58 +54,70 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 mx-auto border p-5 rounded-lg">
-      <div className="flex gap-5">
-      <input
-        type="text"
-        placeholder="Your Name"
-        className="w-full p-2 border rounded"
-        value={name}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Your Email"
-        className="w-full p-2 border rounded"
-        value={email}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-        required
-      />
-      </div>
-      <input
-        type="tel"
-        placeholder="Phone Number"
-        className="w-full p-2 border rounded"
-        value={phone}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Subject"
-        className="w-full p-2 border rounded"
-        value={subject}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
-        required
-      />
-      <textarea
-        placeholder="Your Message"
-        className="w-full p-2 border rounded"
-        rows={5}
-        value={message}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
-        required
-      ></textarea>
-      <button
-        type="submit"
-        disabled={loading}
-        className="md:w-full text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-2 rounded-lg cursor-pointer"
-      >
-        {loading ? "Sending..." : "Send Message"}
-      </button>
-    </form>
+    <div>
+      {!submitted ? ( // ✅ Conditional rendering
+        <form onSubmit={handleSubmit} className="space-y-4 mx-auto border p-5 rounded-lg">
+          <div className="flex gap-5">
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="w-full p-2 border rounded"
+              value={name}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              className="w-full p-2 border rounded"
+              value={email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            className="w-full p-2 border rounded"
+            value={phone}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Subject"
+            className="w-full p-2 border rounded"
+            value={subject}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Your Message"
+            className="w-full p-2 border rounded"
+            rows={5}
+            value={message}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
+            required
+          ></textarea>
+          <button
+            type="submit"
+            disabled={loading}
+            className="md:w-full text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-2 rounded-lg cursor-pointer"
+          >
+            {loading ? "Sending..." : "Send Message"}
+          </button>
+        </form>
+      ) : (
+        <div className="text-center py-12">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Thank You!</h2>
+          <p className="text-black-300">
+            Your message has been sent successfully. I’ll get back to you soon.
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
+
 
 
 
