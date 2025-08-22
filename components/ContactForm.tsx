@@ -61,7 +61,7 @@ export default function ContactForm() {
         placeholder="Your Name"
         className="w-full p-2 border rounded"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
         required
       />
       <input
@@ -69,7 +69,7 @@ export default function ContactForm() {
         placeholder="Your Email"
         className="w-full p-2 border rounded"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
         required
       />
       </div>
@@ -78,22 +78,22 @@ export default function ContactForm() {
         placeholder="Phone Number"
         className="w-full p-2 border rounded"
         value={phone}
-        onChange={(e) => setPhone(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
       />
       <input
         type="text"
         placeholder="Subject"
         className="w-full p-2 border rounded"
         value={subject}
-        onChange={(e) => setSubject(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
         required
       />
       <textarea
         placeholder="Your Message"
         className="w-full p-2 border rounded"
-        rows="5"
+        rows={5}
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
         required
       ></textarea>
       <button
