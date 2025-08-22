@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* Theme source of truth */
-:root { --page-bg: #ffffff; --page-fg: #111827; }
-html.dark { --page-bg: #000000; --page-fg: #e5e7eb; }
+:root { --page-bg: #ffffff; --page-fg: #111827; --card-bg: #f9fafb; }
+html.dark { --page-bg: #000000; --page-fg: #e5e7eb; --card-bg: #000000;}
 
 /* Apply globally */
 html, body { background-color: var(--page-bg); color: var(--page-fg); }
@@ -19,3 +19,17 @@ h1, h2, h3 { font-family: var(--font-playfair), var(--font-geist-sans), serif; }
 html.dark ::-webkit-scrollbar-thumb { background: #4b5563; }
 * { scrollbar-width: thin; scrollbar-color: #6b7280 var(--page-bg); }
 html.dark * { scrollbar-color: #4b5563 var(--page-bg); }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}

@@ -10,7 +10,7 @@ export default function ContactForm() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false); // ✅ New state
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ export default function ContactForm() {
         setPhone("");
         setSubject("");
         setMessage("");
-        setSubmitted(true); // ✅ Show thank-you message
+        setSubmitted(true);
       } else {
         toast.error("Failed to send message.");
       }
@@ -109,7 +109,7 @@ export default function ContactForm() {
       ) : (
         <div className="text-center py-12">
           <h2 className="text-2xl font-bold text-green-400 mb-4">Thank You!</h2>
-          <p className="text-black-300">
+          <p className="text-gray-300">
             Your message has been sent successfully. I’ll get back to you soon.
           </p>
         </div>

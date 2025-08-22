@@ -22,15 +22,8 @@ export default function Footer() {
 
   return (
     <footer className="py-8">
-      <div className="mx-auto flex max-w-5xl items-center gap-4 px-6 sm:flex-row sm:justify-between sm:px-8">
-        <div className="flex flex-col">
-          <p className="text-sm text-foreground/70">
-            © {new Date().getFullYear()} Lucky Jha
-          </p>
-          <br />
-          <p>Designed and developed by <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent cursor-pointer"><a href="https://x.com/Theluckyjha" target="_blank">Lucky Jha</a></span></p>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-3">
+      <div className="mx-auto flex md:flex-row flex-col max-w-5xl items-center gap-4 px-6 sm:justify-between sm:px-8">
+      <div className="flex flex-col items-center justify-center gap-3">
           <div>
             <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Follow me on</p>
           </div>
@@ -43,7 +36,16 @@ export default function Footer() {
           {socialItem("#", Youtube, true)}
           </div>
           
+          
         </div>
+        <div className="text-[10px] md:text-[15px] flex md:gap-0 md:flex-col gap-5" >
+          <p className="text-foreground/70">
+            © {new Date().getFullYear()} Lucky Jha
+          </p>
+          <br />
+          <p>Designed and developed by <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent cursor-pointer"><a href="https://x.com/Theluckyjha" target="_blank">Lucky Jha</a></span></p>
+        </div>
+        
       </div>
     </footer>
   )
