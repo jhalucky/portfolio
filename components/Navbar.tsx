@@ -14,10 +14,6 @@ export default function Navbar() {
   const handleToggle = () => {
     const next = resolvedTheme === "dark" ? "light" : "dark";
     setTheme(next);
-    // Fallback: ensure html class updates immediately
-    if (typeof document !== "undefined") {
-      document.documentElement.classList.toggle("dark", next === "dark");
-    }
   };
 
   return (

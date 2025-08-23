@@ -1,24 +1,73 @@
 @import "tailwindcss";
 
-/* Theme source of truth */
-:root { --page-bg: #ffffff; --page-fg: #111827; --card-bg: #f9fafb; }
-html.dark { --page-bg: #000000; --page-fg: #e5e7eb; --card-bg: #000000;}
+/* Theme variables */
+:root {
+  --bg-primary: #ffffff;
+  --text-primary: #111827;
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+}
 
-/* Apply globally */
-html, body { background-color: var(--page-bg); color: var(--page-fg); }
+html.dark {
+  --bg-primary: #000000;
+  --text-primary: #f9fafb;
+  --card-bg: #000000;
+  --card-border: #374151;
+}
 
-/* Typography */
-body { font-family: var(--font-geist-sans), system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+/* Apply theme to body */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
 
 h1, h2, h3 { font-family: var(--font-playfair), var(--font-geist-sans), serif; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--page-bg); }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: #6b7280; border-radius: 4px; }
 html.dark ::-webkit-scrollbar-thumb { background: #4b5563; }
-* { scrollbar-width: thin; scrollbar-color: #6b7280 var(--page-bg); }
-html.dark * { scrollbar-color: #4b5563 var(--page-bg); }
+* { scrollbar-width: thin; scrollbar-color: #6b7280 var(--bg-primary); }
+html.dark * { scrollbar-color: #4b5563 var(--bg-primary); }
+
+/* Moving border animation */
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-border {
+  position: relative;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff, #5f27cd);
+  background-size: 400% 400%;
+  animation: border-flow 3s ease infinite;
+  border-radius: 12px;
+  padding: 2px;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff, #5f27cd);
+  background-size: 400% 400%;
+  animation: border-flow 3s ease infinite reverse;
+  z-index: -1;
+}
 
 @keyframes shimmer {
   0% {

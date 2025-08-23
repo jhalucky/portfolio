@@ -7,19 +7,19 @@ const projects = [
   {
     id: 1,
     title: "Meal Finder",
-    description: "Find meals by ingredients or categories.",
+    description: "Find delicious recipes and meal ideas.",
     img: "/mealfinder.png",
-    tech: ["React", "JavaScript", "Tailwind", "API"],
-    live: "https://meal-finder-yourmeal.vercel.app",
-    code: "https://github.com/jhalucky/Meal-Finder",
+    tech: ["React", "API", "CSS"],
+    live: "https://jhalucky.github.io/meal-finder/",
+    code: "https://github.com/jhalucky/meal-finder",
   },
   {
     id: 2,
     title: "Crypto Price Tracker",
-    description: "A sleek portfolio showcasing work and blogs.",
+    description: "Track cryptocurrency prices in real-time.",
     img: "/cryptotracker.png",
-    tech: ["React", "API", "Tailwind"],
-    live: "https://cryptocurrenciespricetracker.vercel.app/",
+    tech: ["React", "API", "CSS"],
+    live: "https://jhalucky.github.io/Crypto-Price-Tracker/",
     code: "https://github.com/jhalucky/Crypto-Price-Tracker",
   },
   {
@@ -58,45 +58,54 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
 
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="text-xl font-semibold">Projects</h2>
+      <h2 className="text-xl font-semibold" style={{ color: 'var(--text-primary)' }}>Projects</h2>
       <div className="grid gap-6 sm:grid-cols-2">
         {visibleProjects.map((project) => (
           <div
             key={project.id}
-            className="p-[1px] rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
-             bg-[length:200%_200%] animate-[shimmer_2s_linear_infinite]"
+            className="animated-border"
           >
-            <article className="relative rounded-lg p-5 bg-[var(--card-bg)] text-[var(--page-fg)]">
+            <article 
+              className="relative rounded-xl p-5"
+              style={{
+                backgroundColor: 'var(--card-bg)',
+              }}
+            >
               <img
                 src={project.img}
                 alt={project.title}
                 className="rounded-md mb-3"
               />
-              <h3 className="text-base font-semibold">{project.title}</h3>
-              <p className="mt-2 text-sm text-foreground/80">
+              <h3 className="text-base font-semibold" style={{ color: 'var(--text-primary)' }}>{project.title}</h3>
+              <p className="mt-2 text-sm" style={{ color: 'var(--text-primary)' }}>
                 {project.description}
               </p>
-              <div className="mt-3 flex flex-wrap gap-2 text-xs text-foreground/70">
-          
-                   {project.tech.map((tech, techIdx) => (
-                <span
-                  key={techIdx}
-                  className="rounded-md border px-2 py-1 cursor-pointer hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500"
-                >
-                  {tech}
-                </span>
+              <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                {project.tech.map((tech, techIdx) => (
+                  <span
+                    key={techIdx}
+                    className="rounded-md border px-2 py-1 cursor-pointer hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500"
+                    style={{ 
+                      color: 'var(--text-primary)',
+                      borderColor: 'var(--card-border)'
+                    }}
+                  >
+                    {tech}
+                  </span>
                 ))}
               </div>
               <div className="mt-4 flex gap-4 text-sm">
                 <Link
                   className="underline underline-offset-4"
                   href={project.live}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Live
                 </Link>
                 <Link
                   className="underline underline-offset-4"
                   href={project.code}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Code
                 </Link>
@@ -110,6 +119,10 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
           <button
             onClick={() => setExpanded(!expanded)}
             className="rounded-md border px-4 py-2 text-sm hover:bg-foreground/5 cursor-pointer hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500"
+            style={{ 
+              color: 'var(--text-primary)',
+              borderColor: 'var(--card-border)'
+            }}
           >
             {expanded ? "Show Less" : "Load More"}
           </button>

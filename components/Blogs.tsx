@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 // Blog metadata type
 type BlogMeta = {
-  images: string;
+  image: string;
   slug: string;
   title: string;
   description: string;
@@ -15,59 +16,107 @@ type BlogMeta = {
 export default function Blogs({ showAll = false }: { showAll?: boolean }) {
   const [expanded, setExpanded] = useState(false);
   const [blogs, setBlogs] = useState<BlogMeta[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { resolvedTheme } = useTheme();
 
   // Fetch blogs metadata from API
   useEffect(() => {
     async function fetchBlogs() {
-      const res = await fetch("/api/blogs"); // 👈 API route to read /content
-      const data = await res.json();
-      setBlogs(data);
+      try {
+        setLoading(true);
+        const res = await fetch("/api/blogs");
+        const data = await res.json();
+        console.log("Fetched blogs:", data); // Debug log
+        setBlogs(data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchBlogs();
   }, []);
 
   const visibleProjects = showAll || expanded ? blogs : blogs.slice(0, 2);
 
+  if (loading) {
+    return (
+      <div className="flex flex-col">
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>
+            {showAll ? "My Blog" : "Latest Blog Posts"}
+          </h2>
+          <p style={{ color: 'var(--text-primary)' }}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col gap-5">
-        <h2 className="text-xl font-semibold">Blogs</h2>
+      <div className="flex flex-col gap-8">
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>
+            {showAll ? "My Blog" : "Blogs"}
+          </h2>
+          {showAll && (
+            <p style={{ color: 'var(--text-primary)' }} className="max-w-2xl mx-auto">
+              Sharing my journey, insights, and experiences in the world of technology and coding.
+            </p>
+          )}
+        </div>
+
+
 
         {/* Blog grid */}
-        <div className="grid gap-6 sm:grid-cols-1">
+        <div className="grid gap-8 sm:grid-cols-1">
           {visibleProjects.map((blog) => (
             <Link key={blog.slug} href={`/blogs/${blog.slug}`}>
-              <div
-                className="relative flex flex-col md:flex-row p-[1px] rounded-lg 
-                bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
-                bg-[length:200%_200%] animate-[shimmer_2s_linear_infinite]"
-              >
-                <article className="relative w-full rounded-lg p-5 bg-[var(--card-bg)] text-[var(--page-fg)] flex flex-col md:flex-row md:items-center justify-between">
-                <div className="block md:hidden py-2 md:mt-0 md:ml-4 object-fit">
+              <div className="animated-border group hover:scale-[1.02] transition-transform duration-300">
+                <article 
+                  className="relative w-full rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between"
+                  style={{
+                    backgroundColor: 'var(--card-bg)',
+                  }}
+                >
+                  {/* Blog Image */}
+                  <div className="hidden md:block md:w-48 md:h-32 md:mr-6">
                     <img
-                      src={blog.images || "/images/how-i-started.png"}
+                      src={blog.image || "/images/how-i-started.png"}
                       alt={blog.title}
-                      className="w-full md:w-32 my:5 h-auto rounded-lg object-contain"
+                      className="w-full h-full rounded-xl object-cover shadow-lg"
                     />
                   </div>
                   
                   {/* Blog Text */}
-                  <div className="flex-1">
-                    <h3 className="text-base font-semibold">{blog.title}</h3>
-                    <p className="mt-2 text-sm text-foreground/80">
+                  <div className="flex-1 space-y-3">
+                    <h3 
+                      className="text-xl font-semibold transition-colors duration-300"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      {blog.title}
+                    </h3>
+                    <p 
+                      className="leading-relaxed"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
                       {blog.description}
                     </p>
-                    <div className="mt-3 text-xs text-foreground/60">
-                      {blog.date} • 4 min read
+                    <div className="flex items-center gap-4 text-sm">
+                      <span style={{ color: 'var(--text-primary)' }}>{blog.date}</span>
+                      <span style={{ color: 'var(--text-primary)' }}>•</span>
+                      <span style={{ color: 'var(--text-primary)' }}>4 min read</span>
+                      <span style={{ color: 'var(--text-primary)' }}>•</span>
+                      <span style={{ color: 'var(--text-primary)' }} className="font-medium">Read more →</span>
                     </div>
                   </div>
 
-                  {/* Blog Image */}
-                  <div className="hidden md:block mt-4 md:mt-0 md:ml-4">
+                  {/* Mobile Image */}
+                  <div className="block md:hidden mt-4">
                     <img
-                      src={blog.images || "/images/how-i-started.png"}
+                      src={blog.image || "/images/how-i-started.png"}
                       alt={blog.title}
-                      className="w-full md:w-32 h-auto rounded-lg object-contain"
+                      className="w-full h-48 rounded-xl object-cover shadow-lg"
                     />
                   </div>
                 </article>
@@ -78,14 +127,12 @@ export default function Blogs({ showAll = false }: { showAll?: boolean }) {
 
         {/* Load More button */}
         {!showAll && blogs.length > 2 && (
-          <div className="flex justify-center">
+          <div className="flex justify-center pt-4">
             <button
               onClick={() => setExpanded(!expanded)}
-              className="rounded-md border px-4 py-2 text-sm cursor-pointer 
-              hover:bg-foreground/5 hover:bg-gradient-to-r 
-              hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500"
+              className="px-6 py-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
             >
-              {expanded ? "Show Less" : "Load More"}
+              {expanded ? "Show Less" : "Load More Posts"}
             </button>
           </div>
         )}
