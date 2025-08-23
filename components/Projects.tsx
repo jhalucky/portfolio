@@ -10,8 +10,8 @@ const projects = [
     description: "Find meals by ingredients or categories.",
     img: "/mealfinder.png",
     tech: ["React", "JavaScript", "Tailwind", "API"],
-    live: "#",
-    code: "#",
+    live: "https://meal-finder-yourmeal.vercel.app",
+    code: "https://github.com/jhalucky/Meal-Finder",
   },
   {
     id: 2,
