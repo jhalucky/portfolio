@@ -51,11 +51,10 @@ const projects = [
   },
 ];
 
-export default function Projects() {
-  const [showAll, setShowAll] = useState(false);
+export default function Projects({ showAll = false }: { showAll?: boolean }) {
+  const [expanded, setExpanded] = useState(false);
 
-  // 👇 use visibleProjects instead of projects directly
-  const visibleProjects = showAll ? projects : projects.slice(0, 4);
+  const visibleProjects = showAll || expanded ? projects : projects.slice(0, 4);
 
   return (
     <div className="flex flex-col gap-5">
@@ -64,7 +63,8 @@ export default function Projects() {
         {visibleProjects.map((project) => (
           <div
             key={project.id}
-            className="p-[1px] rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-shimmer"
+            className="p-[1px] rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+             bg-[length:200%_200%] animate-[shimmer_2s_linear_infinite]"
           >
             <article className="relative rounded-lg p-5 bg-[var(--card-bg)] text-[var(--page-fg)]">
               <img
@@ -101,19 +101,16 @@ export default function Projects() {
           </div>
         ))}
       </div>
-
-      <div className="flex justify-center">
-        {projects.length > 4 && (
-          
+      {!showAll && projects.length > 4 && (
+        <div className="flex justify-center">
           <button
-            onClick={() => setShowAll(!showAll)}
+            onClick={() => setExpanded(!expanded)}
             className="rounded-md border px-4 py-2 text-sm hover:bg-foreground/5"
           >
-            {showAll ? "Show Less" : "Load More"}
+            {expanded ? "Show Less" : "Load More"}
           </button>
-          
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
+import ProjectsPage from "@/app/projects/page";
 
 export default function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -26,8 +27,8 @@ export default function Navbar() {
           Lucky Jha
         </Link>
         <nav className="flex items-center gap-6 text-sm">
-          <Link href="#home" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Home</Link>
-          <Link href="#projects" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Projects</Link>
+          <Link href="/" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Home</Link>
+          <Link href="/projects" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Projects</Link>
           <Link href="#blogs" className="hover:text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Blogs</Link>
           <button
             aria-label="Toggle theme"
