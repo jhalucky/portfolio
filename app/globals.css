@@ -33,3 +33,10 @@ html.dark * { scrollbar-color: #4b5563 var(--page-bg); }
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
 }
+
+.icons {
+   border-radius: 5px;
+}
+.icons:hover {
+  background: linear-gradient( #EC4899, #A855F7, #6366F1);
+}

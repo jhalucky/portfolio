@@ -98,6 +98,7 @@ export default function ContactForm() {
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
             required
           ></textarea>
+          <div className="flex items-center justify-center">
           <button
             type="submit"
             disabled={loading}
@@ -105,6 +106,7 @@ export default function ContactForm() {
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
+          </div>
         </form>
       ) : (
         <div className="text-center py-12">

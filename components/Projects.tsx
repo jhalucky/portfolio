@@ -77,10 +77,14 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
                 {project.description}
               </p>
               <div className="mt-3 flex flex-wrap gap-2 text-xs text-foreground/70">
-                {project.tech.map((t) => (
-                  <span key={t} className="rounded-md border px-2 py-1">
-                    {t}
-                  </span>
+          
+                   {project.tech.map((tech, techIdx) => (
+                <span
+                  key={techIdx}
+                  className="rounded-md border px-2 py-1 cursor-pointer hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500"
+                >
+                  {tech}
+                </span>
                 ))}
               </div>
               <div className="mt-4 flex gap-4 text-sm">
@@ -105,7 +109,7 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
         <div className="flex justify-center">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="rounded-md border px-4 py-2 text-sm hover:bg-foreground/5"
+            className="rounded-md border px-4 py-2 text-sm hover:bg-foreground/5 cursor-pointer hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500"
           >
             {expanded ? "Show Less" : "Load More"}
           </button>
