@@ -24,6 +24,15 @@ const projects = [
   },
   {
     id: 3,
+    title: "Your City Weather",
+    description: "See your city weather",
+    img: "/weather.png",
+    tech: ["React", "API", "CSS"],
+    live: "https://your-city-weather.vercel.app/",
+    code: "https://github.com/jhalucky/Weather App",
+  },
+  {
+    id: 4,
     title: "Cocacola Redesigned",
     description: "Check the weather forecast worldwide.",
     img: "/cocacola.png",
@@ -32,7 +41,7 @@ const projects = [
     code: "https://github.com/jhalucky/coca-cola-landingpage",
   },
   {
-    id: 4,
+    id: 5,
     title: "Cocacola Redesigned",
     description: "Check the weather forecast worldwide.",
     img: "/cocacola.png",
@@ -41,7 +50,7 @@ const projects = [
     code: "#",
   },
   {
-    id: 5,
+    id: 6,
     title: "Cocacola Redesigned",
     description: "Check the weather forecast worldwide.",
     img: "/cocacola.png",
