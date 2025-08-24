@@ -7,13 +7,13 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {
       keyframes: {
         shimmer: {
-          "0%": { "background-position": "-200% 0" },
-          "100%": { "background-position": "200% 0" },
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
@@ -23,4 +23,6 @@ const config: Config = {
   },
   plugins: [require("@tailwindcss/typography")],
 };
+
 export default config;
+

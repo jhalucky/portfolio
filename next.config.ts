@@ -1,11 +1,11 @@
-import nextMDX from '@next/mdx';
+const nextMDX = require('@next/mdx');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
 };
 
 const withMDX = nextMDX({
