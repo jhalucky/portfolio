@@ -55,15 +55,15 @@ export default function Blogs({ showAll = false }: { showAll?: boolean }) {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-8">
-        <div className="text-center space-y-4">
+        <div className="space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>
-            {showAll ? "My Blog" : "Blogs"}
+            {showAll ? "My Blogs" : "Blogs"}
           </h2>
-          {showAll && (
-            <p style={{ color: 'var(--text-primary)' }} className="max-w-2xl mx-auto">
-              Sharing my journey, insights, and experiences in the world of technology and coding.
-            </p>
-          )}
+          {/* {showAll && (
+            // <p style={{ color: 'var(--text-primary)' }} className="max-w-2xl mx-auto">
+            //   Sharing my journey, insights, and experiences in the world of technology and coding.
+            // </p>
+          )} */}
         </div>
 
 
@@ -125,14 +125,17 @@ export default function Blogs({ showAll = false }: { showAll?: boolean }) {
           ))}
         </div>
 
-        {/* Load More button */}
-        {!showAll && blogs.length > 2 && (
-          <div className="flex justify-center pt-4">
+        {!showAll && blogs.length > 1 && (
+          <div className="flex justify-center">
             <button
               onClick={() => setExpanded(!expanded)}
-              className="px-6 py-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
+              className="rounded-md border px-4 py-2 text-sm hover:bg-foreground/5 cursor-pointer hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500"
+              style={{ 
+                color: 'var(--text-primary)',
+                borderColor: 'var(--card-border)'
+              }}
             >
-              {expanded ? "Show Less" : "Load More Posts"}
+              {expanded ? "Show Less" : "Load More"}
             </button>
           </div>
         )}
