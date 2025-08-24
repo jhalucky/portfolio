@@ -21,7 +21,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Lucky Jha — Portfolio",
+  title: "Hi I'm Lucky Jha",
   description: "Full‑stack developer portfolio showcasing projects, skills, and contact information.",
 };
 
