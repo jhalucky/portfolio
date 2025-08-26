@@ -10,7 +10,7 @@ const projects = [
     description: "Find delicious recipes and meal ideas.",
     img: "/mealfinder.png",
     tech: ["React", "API", "TailwindCSS"],
-    live: "https://jhalucky.github.io/meal-finder/",
+    live: "https://meal-finder-yourmeal.vercel.app/",
     code: "https://github.com/jhalucky/meal-finder",
   },
   {
@@ -19,7 +19,7 @@ const projects = [
     description: "Track cryptocurrency prices in real-time.",
     img: "/cryptotracker.png",
     tech: ["React", "API", "Tailwind"],
-    live: "https://jhalucky.github.io/Crypto-Price-Tracker/",
+    live: "https://cryptocurrenciespricetracker.vercel.app/",
     code: "https://github.com/jhalucky/Crypto-Price-Tracker",
   },
   {
