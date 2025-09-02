@@ -5,10 +5,11 @@ import { useState } from "react";
 
 const projects = [
   {
-    id: 1,
+    id: 1, 
     title: "Meal Finder",
     description: "Find delicious recipes and meal ideas.",
     img: "/mealfinder.png",
+    favicon: "https://meal-finder-yourmeal.vercel.app/favicon.svg",
     tech: ["React", "API", "TailwindCSS"],
     live: "https://meal-finder-yourmeal.vercel.app/",
     code: "https://github.com/jhalucky/meal-finder",
@@ -18,6 +19,7 @@ const projects = [
     title: "Crypto Price Tracker",
     description: "Track cryptocurrency prices in real-time.",
     img: "/cryptotracker.png",
+    favicon: "https://cryptocurrenciespricetracker.vercel.app/rupee-sign.svg",
     tech: ["React", "API", "Tailwind"],
     live: "https://cryptocurrenciespricetracker.vercel.app/",
     code: "https://github.com/jhalucky/Crypto-Price-Tracker",
@@ -27,17 +29,19 @@ const projects = [
     title: "Your City Weather",
     description: "See your city weather",
     img: "/weather.png",
+    favicon: "https://your-city-weather.vercel.app/favicon.ico",
     tech: ["JavaScript", "API", "TailwindCSS"],
     live: "https://your-city-weather.vercel.app/",
     code: "https://github.com/jhalucky/Weather App",
   },
   {
     id: 4,
-    title: "Cocacola Redesigned",
-    description: "Check the weather forecast worldwide.",
-    img: "/cocacola.png",
+    title: "DevPeek",
+    description: "See Github Profile of any person.",
+    img: "/Devpeek.png",
+    favicon: "https://devpeek.vercel.app/favicon.svg",
     tech: ["React", "CSS"],
-    live: "https://jhalucky.github.io/coca-cola-landingpage/",
+    live: "https://devpeek.vercel.app/",
     code: "https://github.com/jhalucky/coca-cola-landingpage",
   },
   {
@@ -45,9 +49,10 @@ const projects = [
     title: "Cocacola Redesigned",
     description: "Check the weather forecast worldwide.",
     img: "/cocacola.png",
+    favicon: "https://coca-cola-landingpage.vercel.app/coca-logo.svg",
     tech: ["React", "API", "CSS"],
-    live: "#",
-    code: "#",
+    live: "https://coca-cola-landingpage.vercel.app/",
+    code: "https://github.com/jhalucky/coca-cola-landingpage",
   },
   {
     id: 6,
@@ -79,13 +84,16 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
               style={{
                 backgroundColor: 'var(--card-bg)',
               }}
-            >
+            ><div className="">
+              <img rel="icon" src={project.favicon} className="mb-2 bg-gray-300 rounded-full h-20" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{project.title}</h3>
+
               <img
                 src={project.img}
                 alt={project.title}
                 className="rounded-md mb-3"
               />
-              <h3 className="text-base font-semibold" style={{ color: 'var(--text-primary)' }}>{project.title}</h3>
               <p className="mt-2 text-sm" style={{ color: 'var(--text-primary)' }}>
                 {project.description}
               </p>
