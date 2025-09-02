@@ -49,7 +49,7 @@ const projects = [
     title: "Cocacola Redesigned",
     description: "Check the weather forecast worldwide.",
     img: "/cocacola.png",
-    favicon: "https://coca-cola-landingpage.vercel.app/coca-logo.svg",
+    favicon: "https://coca-cola-landingpage.vercel.app/favicon.ico",
     tech: ["React", "API", "CSS"],
     live: "https://coca-cola-landingpage.vercel.app/",
     code: "https://github.com/jhalucky/coca-cola-landingpage",
