@@ -10,60 +10,52 @@ export default function ContactForm() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false); // ✅ New state
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const confirmed = window.confirm("Do you really want to send the message?");
     if (!confirmed) return;
 
     setLoading(true);
-    const formData = { name, email, phone, subject, message };
 
     try {
-      // 1. Send to Formspree
-      const formspreeRes = await fetch("https://formspree.io/f/mvgqobkn", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ name, email, phone, subject, message }),
       });
 
-      // 2. Send to Google Sheets
-      await fetch("https://script.google.com/macros/s/AKfycbyY9Sn14A4fyUg0wU2qCB8ES7A3hvcAnTfbGiJLSshhHfdJV6PDeWJar-pGBJfRWD45zw/exec", {
-        method: "POST",
-        body: JSON.stringify(formData),
-      });
+      const result = await res.json();
 
-      if (formspreeRes.ok) {
-        toast.success("Message sent!");
-        setName("");
-        setEmail("");
-        setPhone("");
-        setSubject("");
-        setMessage("");
+      if (result.success) {
+        toast.success("Message sent successfully!");
         setSubmitted(true);
       } else {
         toast.error("Failed to send message.");
       }
-    } catch (error) {
+    } catch (err) {
       toast.error("Something went wrong.");
-      console.error(error);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <div>
-      {!submitted ? ( // ✅ Conditional rendering
-        <form onSubmit={handleSubmit} className="space-y-4 mx-auto border p-5 rounded-lg">
+      {!submitted ? (
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 mx-auto border p-5 rounded-lg"
+        >
           <div className="flex gap-5">
             <input
               type="text"
               placeholder="Your Name"
               className="w-full p-2 border rounded"
               value={name}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               required
             />
             <input
@@ -71,7 +63,7 @@ export default function ContactForm() {
               placeholder="Your Email"
               className="w-full p-2 border rounded"
               value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -80,14 +72,14 @@ export default function ContactForm() {
             placeholder="Phone Number"
             className="w-full p-2 border rounded"
             value={phone}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+            onChange={(e) => setPhone(e.target.value)}
           />
           <input
             type="text"
             placeholder="Subject"
             className="w-full p-2 border rounded"
             value={subject}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
+            onChange={(e) => setSubject(e.target.value)}
             required
           />
           <textarea
@@ -95,17 +87,17 @@ export default function ContactForm() {
             className="w-full p-2 border rounded"
             rows={5}
             value={message}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
+            onChange={(e) => setMessage(e.target.value)}
             required
-          ></textarea>
+          />
           <div className="flex items-center justify-center">
-          <button
-            type="submit"
-            disabled={loading}
-            className="md:w-full text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-2 rounded-lg cursor-pointer"
-          >
-            {loading ? "Sending..." : "Send Message"}
-          </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="md:w-full text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-2 rounded-lg cursor-pointer"
+            >
+              {loading ? "Sending..." : "Send Message"}
+            </button>
           </div>
         </form>
       ) : (
@@ -119,7 +111,3 @@ export default function ContactForm() {
     </div>
   );
 }
-
-
-
-
