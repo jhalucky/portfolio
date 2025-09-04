@@ -53,22 +53,24 @@ html.dark * { scrollbar-color: #4b5563 var(--bg-primary); }
   background-size: 400% 400%;
   animation: border-flow 3s ease infinite;
   border-radius: 12px;
+  overflow: hidden;
   padding: 2px;
 }
 
 .animated-border::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0; /* shorthand for top/right/bottom/left: 0 */
   border-radius: 12px;
-  padding: 2px;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff, #5f27cd);
-  background-size: 400% 400%;
+  background: inherit;
+  background-size: inherit;
   animation: border-flow 3s ease infinite reverse;
-  z-index: -1;
+  z-index: 0; /* keep it behind */
+}
+
+.project-card {
+  position: relative;
+  z-index: 1; /* ensures card content is always above border */
 }
 
 @keyframes shimmer {

@@ -33,11 +33,7 @@ export default function Home() {
         <section className="space-y-3">
           <h2 className="text-xl font-semibold">What I do?</h2>
           <p className="text-foreground/80">
-            I've delivered 10+ freelance projects, interned at two startups and
-            failed to build my own startup twice. #LifeGoesOn. I'm super active
-            on X where I share funnies and #BuildInPublic. I'm an AWS Cloud Club
-            Captain, a maintainer and contributor of open-source projects. When
-            not coding, I read books, go out for a run or binge YouTube.
+            I build web applications that solve real problems. From meal discovery apps to crypto trackers, I enjoy creating tools that make life easier. I'm passionate about clean code, smooth user experiences, and learning new technologies. When I'm not coding, you'll find me exploring new frameworks, contributing to open-source, or sharing my journey on social media.
           </p>
         </section>
 
