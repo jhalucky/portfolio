@@ -19,7 +19,7 @@ export default function Home() {
         <section id="about" className="space-y-3">
           <h2 className="text-xl font-semibold">About</h2>
           <p className="text-foreground/80">
-            I craft reliable, accessible web apps with React, Next.js, and
+            I craft reliable, accessible web apps with React, Next.js, JavaScript, and
             TypeScript. I care about clean architecture, smooth performance, and
             great DX.<br></br>
             When I’m not coding, you’ll probably find me sketching new ideas,

@@ -25,8 +25,6 @@ const ROW_B: Tech[] = [
   { name: "AWS", icon: SiAmazon },
   { name: "Vercel", icon: SiVercel },
   { name: "Git", icon: SiGit },
-  { name: "Jest", icon: SiJest },
-  { name: "Redis", icon: SiRedis },
   { name: "GraphQL", icon: SiGraphql },
 ];
 
@@ -44,7 +42,7 @@ function Track({ items, reverse }: { items: Tech[]; reverse?: boolean }) {
           const Icon = t.icon;
           return (
             <div
-              key={`${t.name}-${i}`} // ✅ moved key here
+              key={`${t.name}-${i}`} 
               className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-3 py-2 rounded-3xl flex items-center justify-center"
             >
               <span className="inline-flex items-center gap-3">
