@@ -56,7 +56,7 @@ export default function Blogs({ showAll = false }: { showAll?: boolean }) {
   return (
     <div className="flex flex-col gap-8">
       <div className="space-y-4">
-        <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
+        <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">
           {showAll ? "My Blogs" : "Blogs"}
         </h2>
       </div>

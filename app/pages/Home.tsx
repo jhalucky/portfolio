@@ -41,16 +41,16 @@ export default function Home() {
         {/* About */}
         <SectionWrapper id="about">
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
+            <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">
               About
             </h2>
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-foreground/80 text-lg leading-relaxed">
+            <div className="prose prose-base dark:prose-invert max-w-none">
+              <p className="text-foreground/80 text-base leading-relaxed">
                 I craft reliable, accessible web apps with React, Next.js, and
                 TypeScript. I care about clean architecture, smooth performance, and
                 great DX.
               </p>
-              <p className="text-foreground/80 text-lg leading-relaxed mt-4">
+              <p className="text-foreground/80 text-base leading-relaxed mt-4">
                 When I'm not coding, you'll probably find me sketching new ideas,
                 brainstorming the next side project, or diving into tech communities
                 to learn and share knowledge. At the core, I just love building cool
@@ -63,10 +63,10 @@ export default function Home() {
         {/* What I do */}
         <SectionWrapper>
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
+            <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">
               What I Do
             </h2>
-            <p className="text-foreground/80 text-lg leading-relaxed max-w-3xl">
+            <p className="text-foreground/80 text-base leading-relaxed max-w-3xl">
               I build web applications that solve real problems. From meal discovery apps to crypto trackers, I enjoy creating tools that make life easier. I'm passionate about clean code, smooth user experiences, and learning new technologies. When I'm not coding, you'll find me exploring new frameworks, contributing to open-source, or sharing my journey on social media.
             </p>
           </div>
@@ -75,7 +75,7 @@ export default function Home() {
         {/* Tools & Tech Stack (Marquee) */}
         <SectionWrapper id="tech">
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
+            <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">
               Tools & Tech Stack
             </h2>
             <TechMarquee />
@@ -95,7 +95,7 @@ export default function Home() {
         {/* GitHub Calendar */}
         <SectionWrapper>
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
+            <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">
               GitHub Activity
             </h2>
             <GithubCalendar username="jhalucky" />
@@ -105,7 +105,7 @@ export default function Home() {
         {/* Contact */}
         <SectionWrapper id="contact">
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
+            <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">
               Get in Touch
             </h2>
             <ContactForm />

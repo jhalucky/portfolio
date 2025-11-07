@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+import { ExternalLink, Github } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +13,7 @@ const projects = [
   {
     id: 1, 
     title: "Meal Finder",
-    description: "Find delicious recipes and meal ideas.",
+    description: "Find delicious recipes and meal ideas with a beautiful, intuitive interface.",
     img: "/mealfinder.png",
     favicon: "https://meal-finder-yourmeal.vercel.app/favicon.svg",
     tech: ["React", "API", "TailwindCSS"],
@@ -21,7 +23,7 @@ const projects = [
   {
     id: 2,
     title: "Crypto Price Tracker",
-    description: "Track cryptocurrency prices in real-time.",
+    description: "Track cryptocurrency prices in real-time with live updates and charts.",
     img: "/cryptotracker.png",
     favicon: "https://cryptocurrenciespricetracker.vercel.app/rupee-sign.svg",
     tech: ["React", "API", "Tailwind"],
@@ -31,7 +33,7 @@ const projects = [
   {
     id: 3,
     title: "Your City Weather",
-    description: "See your city weather",
+    description: "Get accurate weather forecasts for any city worldwide.",
     img: "/weather.png",
     favicon: "https://your-city-weather.vercel.app/favicon.ico",
     tech: ["JavaScript", "API", "TailwindCSS"],
@@ -41,7 +43,7 @@ const projects = [
   {
     id: 4,
     title: "DevPeek",
-    description: "See Github Profile of any person.",
+    description: "Explore GitHub profiles with a beautiful, modern interface.",
     img: "/Devpeek.png",
     favicon: "https://devpeek.vercel.app/favicon.svg",
     tech: ["React", "CSS", "GithubAPI"],
@@ -51,7 +53,7 @@ const projects = [
   {
     id: 5,
     title: "Cocacola Redesigned",
-    description: "Check the weather forecast worldwide.",
+    description: "A modern redesign of the classic Coca-Cola landing page.",
     img: "/cocacola.png",
     favicon: "https://coca-cola-landingpage.vercel.app/favicon.svg",
     tech: ["React", "API", "CSS"],
@@ -61,14 +63,13 @@ const projects = [
   {
     id: 6,
     title: "Cocacola Redesigned",
-    description: "Check the weather forecast worldwide.",
+    description: "A modern redesign of the classic Coca-Cola landing page.",
     img: "/cocacola.png",
     tech: ["React", "API", "CSS"],
     live: "#",
     code: "#",
   },
 ];
-
 
 export default function Projects({ showAll = false }: { showAll?: boolean }) {
   const [expanded, setExpanded] = useState(false);
@@ -79,10 +80,10 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
     if (typeof window !== "undefined") {
       const ctx = gsap.context(() => {
         gsap.from(".project-card", {
-          y: 100,
+          y: 50,
           opacity: 0,
-          duration: 0.8,
-          stagger: 0.2,
+          duration: 0.6,
+          stagger: 0.1,
           scrollTrigger: {
             trigger: ".projects-container",
             start: "top 80%",
@@ -99,82 +100,126 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
   }, [visibleProjects]);
 
   return (
-    <div className="flex flex-col gap-5 projects-container">
-      <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">Projects</h2>
+    <div className="flex flex-col gap-8 projects-container">
+      <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">Projects</h2>
       <div className="grid gap-6 sm:grid-cols-2">
-        {visibleProjects.map((project) => (
-          <div
+        {visibleProjects.map((project, index) => (
+          <motion.div
             key={project.id}
-            className="animated-border"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            className="project-card-wrapper group"
           >
             <article 
-              className="relative rounded-xl p-5 project-card"
+              className="relative h-full rounded-lg overflow-hidden project-card border border-foreground/10 hover:border-foreground/20 transition-all duration-300 hover:shadow-lg"
               style={{
                 backgroundColor: 'var(--card-bg)',
               }}
             >
-              <div className="mb-3">
-                <img rel="icon" src={project.favicon} className="mb-2 bg-gray-300 rounded-full h-20 w-20 object-contain p-2" alt={project.title} />
-              </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{project.title}</h3>
-
-              <img
-                src={project.img}
-                alt={project.title}
-                className="rounded-md mb-3"
-              />
-              <p className="mt-2 text-sm" style={{ color: 'var(--text-primary)' }}>
-                {project.description}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                {project.tech.map((tech, techIdx) => (
-                  <span
-                    key={techIdx}
-                    className="rounded-md border px-2 py-1 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:via-cyan-500 hover:to-purple-500 hover:text-white transition-all"
-                    style={{ 
-                      color: 'var(--text-primary)',
-                      borderColor: 'var(--card-border)'
-                    }}
+              {/* Project Image */}
+              <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-900">
+                <img
+                  src={project.img}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Links overlay on hover */}
+                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Link
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-sm hover:bg-white dark:hover:bg-black transition-all duration-300 hover:scale-110"
+                    onClick={(e) => project.live === "#" && e.preventDefault()}
                   >
-                    {tech}
-                  </span>
-                ))}
+                    <ExternalLink className="w-5 h-5 text-foreground" />
+                  </Link>
+                  <Link
+                    href={project.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-sm hover:bg-white dark:hover:bg-black transition-all duration-300 hover:scale-110"
+                    onClick={(e) => project.code === "#" && e.preventDefault()}
+                  >
+                    <Github className="w-5 h-5 text-foreground" />
+                  </Link>
+                </div>
               </div>
-              <div className="mt-4 flex gap-4 text-sm">
-                <Link
-                  className="underline underline-offset-4"
-                  href={project.live}
-                  style={{ color: 'var(--text-primary)' }}
-                >
-                  Live
-                </Link>
-                <Link
-                  className="underline underline-offset-4"
-                  href={project.code}
-                  style={{ color: 'var(--text-primary)' }}
-                >
-                  Code
-                </Link>
+
+              {/* Content */}
+              <div className="p-5 space-y-4">
+                {/* Title and Description */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:via-cyan-500 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((tech, techIdx) => (
+                    <span
+                      key={techIdx}
+                      className="px-2.5 py-1 rounded text-xs font-medium border border-foreground/20 text-foreground/70 hover:border-cyan-500/50 hover:text-cyan-500 transition-colors duration-200"
+                      style={{
+                        backgroundColor: 'var(--card-bg)',
+                      }}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links */}
+                <div className="flex items-center gap-4 pt-2">
+                  <Link
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-sm text-foreground/70 hover:text-cyan-500 transition-colors duration-200 group/link"
+                    onClick={(e) => project.live === "#" && e.preventDefault()}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Live</span>
+                  </Link>
+                  <Link
+                    href={project.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-sm text-foreground/70 hover:text-cyan-500 transition-colors duration-200 group/link"
+                    onClick={(e) => project.code === "#" && e.preventDefault()}
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>Code</span>
+                  </Link>
+                </div>
               </div>
             </article>
-          </div>
+          </motion.div>
         ))}
       </div>
       {!showAll && projects.length > 4 && (
-        <div className="flex justify-center">
-          <button
+        <div className="flex justify-center pt-4">
+          <motion.button
             onClick={() => setExpanded(!expanded)}
-            className="rounded-md border px-4 py-2 text-sm hover:bg-foreground/5 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:via-cyan-500 hover:to-purple-500 hover:text-white transition-all"
-            style={{ 
-              color: 'var(--text-primary)',
-              borderColor: 'var(--card-border)'
+            className="px-6 py-2.5 rounded-lg border border-foreground/20 text-sm font-medium text-foreground/70 hover:text-foreground hover:border-foreground/40 transition-all duration-200"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              backgroundColor: 'var(--card-bg)',
             }}
           >
-            {expanded ? "Show Less" : "Load More"}
-          </button>
+            {expanded ? "Show Less" : "Show More"}
+          </motion.button>
         </div>
       )}
     </div>
   );
 }
-

@@ -29,7 +29,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight">
             <span className="block mb-2">
               <span className="tech-gradient">
                 Hi, I'm Lucky Jha.
@@ -42,7 +42,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-xl sm:text-2xl text-foreground/70 font-light"
+          className="text-lg sm:text-xl text-foreground/70 font-light"
         >
           Full‑Stack Developer
         </motion.p>
@@ -51,7 +51,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-lg sm:text-xl text-foreground/60 max-w-2xl"
+          className="text-base sm:text-lg text-foreground/60 max-w-2xl"
         >
           Building intuitive web experiences with modern technologies. Passionate about clean code, smooth UX, and creating tools that make a difference.
         </motion.p>
