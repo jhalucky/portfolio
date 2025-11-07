@@ -11,28 +11,28 @@ export default function ContactForm() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false); // ✅ New state
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const confirmed = window.confirm("Do you really want to send the message?");
     if (!confirmed) return;
 
     setLoading(true);
-    const formData = { name, email, phone, subject, message };
 
     try {
       // 1. Send to Formspree
       const formspreeRes = await fetch("https://formspree.io/f/mvgqobkn", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ name, email, phone, subject, message }),
       });
 
       // 2. Send to Google Sheets
       await fetch("https://script.google.com/macros/s/AKfycbyY9Sn14A4fyUg0wU2qCB8ES7A3hvcAnTfbGiJLSshhHfdJV6PDeWJar-pGBJfRWD45zw/exec", {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ name, email, phone, subject, message }),
       });
 
       if (formspreeRes.ok) {
@@ -49,9 +49,9 @@ export default function ContactForm() {
     } catch (error) {
       toast.error("Something went wrong.");
       console.error(error);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -99,7 +99,8 @@ export default function ContactForm() {
               id="phone"
               type="tel"
               placeholder="+1 234 567 8900"
-              className="w-full px-4 py-3 rounded-lg border border-foreground/20 bg-background text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-foreground/20 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all"
+              style={{ backgroundColor: 'var(--background)' }}
               value={phone}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
             />
@@ -113,7 +114,8 @@ export default function ContactForm() {
               id="subject"
               type="text"
               placeholder="What's this about?"
-              className="w-full px-4 py-3 rounded-lg border border-foreground/20 bg-background text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-foreground/20 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all"
+              style={{ backgroundColor: 'var(--background)' }}
               value={subject}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
               required
@@ -162,7 +164,3 @@ export default function ContactForm() {
     </div>
   );
 }
-
-
-
-

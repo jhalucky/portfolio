@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { 
   SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, SiTailwindcss,
   SiPostgresql, SiMongodb, SiPrisma, SiDocker, SiAmazon, SiVercel,
-  SiGit, SiJest, SiRedis, SiGraphql
+  SiGit, SiGraphql
 } from "react-icons/si";
 
 type Tech = { name: string; icon: React.ComponentType<{ className?: string }> };
@@ -25,8 +25,6 @@ const ROW_B: Tech[] = [
   { name: "AWS", icon: SiAmazon },
   { name: "Vercel", icon: SiVercel },
   { name: "Git", icon: SiGit },
-  { name: "Jest", icon: SiJest },
-  { name: "Redis", icon: SiRedis },
   { name: "GraphQL", icon: SiGraphql },
 ];
 

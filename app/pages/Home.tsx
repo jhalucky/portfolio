@@ -63,7 +63,7 @@ export default function Home() {
         {/* What I do */}
         <SectionWrapper>
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
               What I Do
             </h2>
             <p className="text-foreground/80 text-lg leading-relaxed max-w-3xl">
@@ -75,7 +75,7 @@ export default function Home() {
         {/* Tools & Tech Stack (Marquee) */}
         <SectionWrapper id="tech">
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
               Tools & Tech Stack
             </h2>
             <TechMarquee />
@@ -95,7 +95,7 @@ export default function Home() {
         {/* GitHub Calendar */}
         <SectionWrapper>
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
               GitHub Activity
             </h2>
             <GithubCalendar username="jhalucky" />
@@ -105,7 +105,7 @@ export default function Home() {
         {/* Contact */}
         <SectionWrapper id="contact">
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl font-bold tech-gradient">
               Get in Touch
             </h2>
             <ContactForm />

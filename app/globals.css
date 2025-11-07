@@ -163,9 +163,29 @@ html.dark * { scrollbar-color: #3b82f6 var(--bg-primary); }
   background-size: 400% 400%;
   animation: border-flow 3s ease infinite;
   border-radius: 12px;
+  overflow: hidden;
   padding: 2px;
 }
 
+<<<<<<< HEAD
+=======
+.animated-border::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* shorthand for top/right/bottom/left: 0 */
+  border-radius: 12px;
+  background: inherit;
+  background-size: inherit;
+  animation: border-flow 3s ease infinite reverse;
+  z-index: 0; /* keep it behind */
+}
+
+.project-card {
+  position: relative;
+  z-index: 1; /* ensures card content is always above border */
+}
+
+>>>>>>> de6fdebeb3dd4a3cac2718e8ae127f02bd40c3b4
 @keyframes shimmer {
   0% {
     background-position: -200% 0;

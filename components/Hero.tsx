@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-      <section id="home" className="relative min-h-[70vh] flex flex-col justify-center items-center sm:items-start space-y-8 py-20 overflow-hidden">
+    <section id="home" className="relative min-h-[70vh] flex flex-col justify-center items-center sm:items-start space-y-8 py-20 overflow-hidden">
       {/* Tech-inspired animated background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-cyan-500/20 to-purple-500/20 dark:from-blue-500/10 dark:via-cyan-500/10 dark:to-purple-500/10 blur-3xl animate-pulse" />
@@ -81,5 +81,3 @@ export default function Hero() {
     </section>
   );
 }
-
-
