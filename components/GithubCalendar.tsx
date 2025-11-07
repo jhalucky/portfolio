@@ -35,7 +35,7 @@ export default function GithubCalendar({ username }: { username: string }) {
   } as const;
 
   return (
-    <div className="rounded-lg flex justify-center border p-4 overflow-x-auto">
+    <div className="rounded-2xl flex justify-center border border-foreground/10 bg-card-bg/50 backdrop-blur-sm p-6 overflow-x-auto">
       <GitHubCalendar
         username={username}
         blockSize={12}

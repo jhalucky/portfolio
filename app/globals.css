@@ -2,19 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Theme variables */
 :root {
   --bg-primary: #ffffff;
   --text-primary: #111827;
   --card-bg: #ffffff;
   --card-border: #e5e7eb;
+  --background: #ffffff;
+  --foreground: #111827;
 }
 
 html.dark {
-  --bg-primary: #000000;
-  --text-primary: #f9fafb;
-  --card-bg: #000000;
-  --card-border: #374151;
+  --bg-primary: #0a0a0f;
+  --text-primary: #e0e7ff;
+  --card-bg: #0f0f1a;
+  --card-border: #1e1b4b;
+  --background: #0a0a0f;
+  --foreground: #e0e7ff;
 }
 
 /* Apply theme to body */
@@ -22,19 +31,120 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-geist-sans), system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
 }
 
-h1, h2, h3 { font-family: var(--font-playfair), var(--font-geist-sans), serif; }
+/* Tech-inspired background patterns */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-/* Scrollbar */
+html.dark body::before {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+}
+
+/* Animated grid overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(34, 211, 238, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+h1, h2, h3 { 
+  font-family: var(--font-playfair), var(--font-geist-sans), serif; 
+}
+
+/* Tech-inspired gradient animations */
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes tech-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.4), 0 0 60px rgba(59, 130, 246, 0.3);
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+.tech-glow {
+  animation: tech-glow 3s ease-in-out infinite;
+}
+
+/* Tech-inspired text gradient */
+.tech-gradient {
+  background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 25%, #8b5cf6 50%, #06b6d4 75%, #3b82f6 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient 4s ease infinite;
+}
+
+/* Tech-inspired scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: #6b7280; border-radius: 4px; }
-html.dark ::-webkit-scrollbar-thumb { background: #4b5563; }
-* { scrollbar-width: thin; scrollbar-color: #6b7280 var(--bg-primary); }
-html.dark * { scrollbar-color: #4b5563 var(--bg-primary); }
+::-webkit-scrollbar-thumb { 
+  background: linear-gradient(180deg, #3b82f6, #22d3ee, #8b5cf6);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #06b6d4, #7c3aed);
+}
+html.dark ::-webkit-scrollbar-thumb { 
+  background: linear-gradient(180deg, #3b82f6, #22d3ee, #8b5cf6);
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #06b6d4, #7c3aed);
+}
+* { scrollbar-width: thin; scrollbar-color: #3b82f6 var(--bg-primary); }
+html.dark * { scrollbar-color: #3b82f6 var(--bg-primary); }
 
-/* Moving border animation */
+/* Moving border animation - kept for backward compatibility */
 @keyframes border-flow {
   0% {
     background-position: 0% 50%;
@@ -49,26 +159,11 @@ html.dark * { scrollbar-color: #4b5563 var(--bg-primary); }
 
 .animated-border {
   position: relative;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff, #5f27cd);
+  background: linear-gradient(45deg, #3b82f6, #22d3ee, #8b5cf6, #06b6d4, #3b82f6);
   background-size: 400% 400%;
   animation: border-flow 3s ease infinite;
   border-radius: 12px;
   padding: 2px;
-}
-
-.animated-border::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 12px;
-  padding: 2px;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff, #5f27cd);
-  background-size: 400% 400%;
-  animation: border-flow 3s ease infinite reverse;
-  z-index: -1;
 }
 
 @keyframes shimmer {
@@ -85,9 +180,50 @@ html.dark * { scrollbar-color: #4b5563 var(--bg-primary); }
   animation: shimmer 3s linear infinite;
 }
 
-.icons {
-   border-radius: 5px;
+/* Utility classes */
+.bg-card-bg {
+  background-color: var(--card-bg);
 }
-.icons:hover {
-  background: linear-gradient( #EC4899, #A855F7, #6366F1);
+
+.bg-background {
+  background-color: var(--background);
+}
+
+.text-foreground {
+  color: var(--foreground);
+}
+
+/* Tech-inspired card effects */
+.tech-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.tech-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Code-inspired monospace accents */
+.code-accent {
+  font-family: var(--font-geist-mono), 'Courier New', monospace;
+  color: #22d3ee;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
 }

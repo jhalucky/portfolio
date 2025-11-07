@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -54,67 +55,109 @@ export default function ContactForm() {
   };
 
   return (
-    <div>
-      {!submitted ? ( // ✅ Conditional rendering
-        <form onSubmit={handleSubmit} className="space-y-4 mx-auto border p-5 rounded-lg">
-          <div className="flex gap-5">
+    <div className="max-w-2xl mx-auto">
+      {!submitted ? (
+        <form onSubmit={handleSubmit} className="space-y-6 p-8 rounded-2xl border border-foreground/10 shadow-lg" style={{ backgroundColor: 'var(--card-bg)' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-foreground/80 mb-2">
+                Your Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                placeholder="John Doe"
+                className="w-full px-4 py-3 rounded-lg border border-foreground/20 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all"
+                style={{ backgroundColor: 'var(--background)' }}
+                value={name}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-foreground/80 mb-2">
+                Your Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="john@example.com"
+                className="w-full px-4 py-3 rounded-lg border border-foreground/20 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all"
+                style={{ backgroundColor: 'var(--background)' }}
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-foreground/80 mb-2">
+              Phone Number <span className="text-foreground/40">(optional)</span>
+            </label>
             <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full p-2 border rounded"
-              value={name}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-              required
+              id="phone"
+              type="tel"
+              placeholder="+1 234 567 8900"
+              className="w-full px-4 py-3 rounded-lg border border-foreground/20 bg-background text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all"
+              value={phone}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
             />
+          </div>
+          
+          <div>
+            <label htmlFor="subject" className="block text-sm font-medium text-foreground/80 mb-2">
+              Subject
+            </label>
             <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full p-2 border rounded"
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+              id="subject"
+              type="text"
+              placeholder="What's this about?"
+              className="w-full px-4 py-3 rounded-lg border border-foreground/20 bg-background text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all"
+              value={subject}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
               required
             />
           </div>
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className="w-full p-2 border rounded"
-            value={phone}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Subject"
-            className="w-full p-2 border rounded"
-            value={subject}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
-            required
-          />
-          <textarea
-            placeholder="Your Message"
-            className="w-full p-2 border rounded"
-            rows={5}
-            value={message}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
-            required
-          ></textarea>
-          <div className="flex items-center justify-center">
+          
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium text-foreground/80 mb-2">
+              Your Message
+            </label>
+            <textarea
+              id="message"
+              placeholder="Tell me about your project or just say hello!"
+              className="w-full px-4 py-3 rounded-lg border border-foreground/20 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all resize-none"
+              style={{ backgroundColor: 'var(--background)' }}
+              rows={6}
+              value={message}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
+              required
+            ></textarea>
+          </div>
+          
           <button
             type="submit"
             disabled={loading}
-            className="md:w-full text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-2 rounded-lg cursor-pointer"
+            className="w-full px-6 py-4 rounded-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 tech-glow"
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
-          </div>
         </form>
       ) : (
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-bold text-green-400 mb-4">Thank You!</h2>
-          <p className="text-gray-300">
-            Your message has been sent successfully. I’ll get back to you soon.
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center py-16 px-8 rounded-2xl border border-green-500/20 bg-green-500/5"
+        >
+          <div className="text-6xl mb-4">✨</div>
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-4">
+            Thank You!
+          </h2>
+          <p className="text-foreground/70 text-lg">
+            Your message has been sent successfully. I'll get back to you soon.
           </p>
-        </div>
+        </motion.div>
       )}
     </div>
   );
