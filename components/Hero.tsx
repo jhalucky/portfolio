@@ -31,7 +31,8 @@ export default function Hero() {
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight">
             <span className="block mb-2">
-              <span className="tech-gradient">
+              <span className="tech-gradient
+              ">
                 Hi, I'm Lucky Jha.
               </span>
             </span>

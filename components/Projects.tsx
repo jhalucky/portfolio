@@ -1,13 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
+import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -76,40 +71,14 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
 
   const visibleProjects = showAll || expanded ? projects : projects.slice(0, 4);
   
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const ctx = gsap.context(() => {
-        gsap.from(".project-card", {
-          y: 50,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: ".projects-container",
-            start: "top 80%",
-          },
-        });
-      });
-
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 100);
-
-      return () => ctx.revert();
-    }
-  }, [visibleProjects]);
 
   return (
     <div className="flex flex-col gap-8 projects-container">
       <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">Projects</h2>
       <div className="grid gap-6 sm:grid-cols-2">
         {visibleProjects.map((project, index) => (
-          <motion.div
+          <div
             key={project.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
             className="project-card-wrapper group"
           >
             <article 
@@ -124,6 +93,8 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
                   src={project.img}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
@@ -202,22 +173,23 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
                 </div>
               </div>
             </article>
-          </motion.div>
+          </div>
         ))}
       </div>
       {!showAll && projects.length > 4 && (
-        <div className="flex justify-center pt-4">
-          <motion.button
-            onClick={() => setExpanded(!expanded)}
-            className="px-6 py-2.5 rounded-lg border border-foreground/20 text-sm font-medium text-foreground/70 hover:text-foreground hover:border-foreground/40 transition-all duration-200"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+        <div className="flex justify-center pt-6">
+          <button
+            type="button"
+            onClick={() => {
+              setExpanded(prev => !prev);
+            }}
+            className="px-8 py-3 rounded-lg border-2 border-cyan-500/50 text-sm font-semibold text-foreground hover:text-cyan-500 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all duration-200 hover:scale-105 active:scale-95"
             style={{
               backgroundColor: 'var(--card-bg)',
             }}
           >
-            {expanded ? "Show Less" : "Show More"}
-          </motion.button>
+            {expanded ? "Show Less" : `Show More (${projects.length - 4} more)`}
+          </button>
         </div>
       )}
     </div>
