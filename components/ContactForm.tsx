@@ -21,37 +21,24 @@ export default function ContactForm() {
 
     setLoading(true);
 
-    try {
-      // 1. Send to Formspree
-      const formspreeRes = await fetch("https://formspree.io/f/mvgqobkn", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, subject, message }),
-      });
-
-      // 2. Send to Google Sheets
-      await fetch("https://script.google.com/macros/s/AKfycbyY9Sn14A4fyUg0wU2qCB8ES7A3hvcAnTfbGiJLSshhHfdJV6PDeWJar-pGBJfRWD45zw/exec", {
-        method: "POST",
-        body: JSON.stringify({ name, email, phone, subject, message }),
-      });
-
-      if (formspreeRes.ok) {
-        toast.success("Message sent!");
-        setName("");
-        setEmail("");
-        setPhone("");
-        setSubject("");
-        setMessage("");
-        setSubmitted(true);
-      } else {
-        toast.error("Failed to send message.");
-      }
-    } catch (error) {
-      toast.error("Something went wrong.");
-      console.error(error);
-    } finally {
-      setLoading(false);
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, phone, subject, message }),
+    });
+    
+    if (res.ok) {
+      toast.success("Message sent!");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setSubject("");
+      setMessage("");
+      setSubmitted(true);
+    } else {
+      toast.error("Failed to send message.");
     }
+    
   };
 
   return (
