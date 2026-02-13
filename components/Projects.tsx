@@ -3,10 +3,20 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
+import { title } from "process";
 
 const projects = [
   {
-    id: 1, 
+   id: 1,
+   title: "InkSpire",
+   description: "Write and read blogs and tip your favourite authors",
+   img: "./inkspire.png",
+   tech: ["Nextjs", ""],
+   live: "https://inkspire-yo.vercel.app/",
+   code: "https://github.com/jhalucky/InkSpire"
+  },
+  {
+    id: 2, 
     title: "Meal Finder",
     description: "Find delicious recipes and meal ideas with a beautiful, intuitive interface.",
     img: "/mealfinder.png",
@@ -16,7 +26,16 @@ const projects = [
     code: "https://github.com/jhalucky/meal-finder",
   },
   {
-    id: 2,
+    id: 3,
+    title: "Chatxmeme",
+    description : "It was a fun project, mostly i learned uploading and fetching images",
+    img: "/chatxmeme.png",
+    tech : ["Typescript", "Image Fetching"],
+    live: "https://chatxmeme.vercel.app/",
+    code: "https://github.com/jhalucky/chatxmeme"
+  },
+  {
+    id: 4,
     title: "Crypto Price Tracker",
     description: "Track cryptocurrency prices in real-time with live updates and charts.",
     img: "/cryptotracker.png",
@@ -26,7 +45,7 @@ const projects = [
     code: "https://github.com/jhalucky/Crypto-Price-Tracker",
   },
   {
-    id: 3,
+    id: 5,
     title: "Your City Weather",
     description: "Get accurate weather forecasts for any city worldwide.",
     img: "/weather.png",
@@ -36,7 +55,7 @@ const projects = [
     code: "https://github.com/jhalucky/Weather App",
   },
   {
-    id: 4,
+    id: 6,
     title: "DevPeek",
     description: "Explore GitHub profiles with a beautiful, modern interface.",
     img: "/Devpeek.png",
@@ -46,7 +65,7 @@ const projects = [
     code: "https://github.com/jhalucky/coca-cola-landingpage",
   },
   {
-    id: 5,
+    id: 7,
     title: "Cocacola Redesigned",
     description: "A modern redesign of the classic Coca-Cola landing page.",
     img: "/cocacola.png",
@@ -56,7 +75,7 @@ const projects = [
     code: "https://github.com/jhalucky/coca-cola-landingpage",
   },
   {
-    id: 6,
+    id: ,
     title: "Cocacola Redesigned",
     description: "A modern redesign of the classic Coca-Cola landing page.",
     img: "/cocacola.png",
