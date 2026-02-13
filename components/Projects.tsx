@@ -10,7 +10,7 @@ const projects = [
    id: 1,
    title: "InkSpire",
    description: "Write and read blogs and tip your favourite authors",
-   img: "./inkspire.png",
+   img: "/inkspire.png",
    tech: ["Nextjs", ""],
    live: "https://inkspire-yo.vercel.app/",
    code: "https://github.com/jhalucky/InkSpire"
@@ -20,7 +20,7 @@ const projects = [
     id: 2,
     title: "Ideias",
     description: "A place where people can come and dump out their project ideas, startup ideas, etc. and get a real time opinion and votes from the real time users",
-    img: "./ideias.png",
+    img: "/ideias.png",
     tech: ["Nextjs", "Reactjs", "Database", "Supabase", "Prisma"],
     live: "https://ideiaas.vercel.app/",
     code: "https://github.com/jhalucky/ideias"
@@ -30,7 +30,7 @@ const projects = [
     id: 3,
     title: "DevoraX",
     description: "People can come practice dsa to learn core subjects to skill development to placement preparation",
-    img: "./devorax.png",
+    img: "/devorax.png",
     tech: ["Nextjs", "Git", "Typescript", "ORM"],
     live: "https://devorax.vercel.app/",
     code: "https://github.com/jhalucky/devoraX"
