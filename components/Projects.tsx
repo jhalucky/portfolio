@@ -74,15 +74,6 @@ const projects = [
     live: "https://coca-cola-landingpage.vercel.app/",
     code: "https://github.com/jhalucky/coca-cola-landingpage",
   },
-  {
-    id: ,
-    title: "Cocacola Redesigned",
-    description: "A modern redesign of the classic Coca-Cola landing page.",
-    img: "/cocacola.png",
-    tech: ["React", "API", "CSS"],
-    live: "#",
-    code: "#",
-  },
 ];
 
 export default function Projects({ showAll = false }: { showAll?: boolean }) {
