@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
-import { title } from "process";
 
 const projects = [
   {
@@ -15,8 +15,28 @@ const projects = [
    live: "https://inkspire-yo.vercel.app/",
    code: "https://github.com/jhalucky/InkSpire"
   },
+
   {
-    id: 2, 
+    id: 2,
+    title: "Ideias",
+    description: "A place where people can come and dump out their project ideas, startup ideas, etc. and get a real time opinion and votes from the real time users",
+    img: "./ideias.png",
+    tech: ["Nextjs", "Reactjs", "Database", "Supabase", "Prisma"],
+    live: "https://ideiaas.vercel.app/",
+    code: "https://github.com/jhalucky/ideias"
+  },
+
+  {
+    id: 3,
+    title: "DevoraX",
+    description: "People can come practice dsa to learn core subjects to skill development to placement preparation",
+    img: "./devorax.png",
+    tech: ["Nextjs", "Git", "Typescript", "ORM"],
+    live: "https://devorax.vercel.app/",
+    code: "https://github.com/jhalucky/devoraX"
+  },
+  {
+    id: 4, 
     title: "Meal Finder",
     description: "Find delicious recipes and meal ideas with a beautiful, intuitive interface.",
     img: "/mealfinder.png",
@@ -26,7 +46,7 @@ const projects = [
     code: "https://github.com/jhalucky/meal-finder",
   },
   {
-    id: 3,
+    id: 5,
     title: "Chatxmeme",
     description : "It was a fun project, mostly i learned uploading and fetching images",
     img: "/chatxmeme.png",
@@ -35,7 +55,7 @@ const projects = [
     code: "https://github.com/jhalucky/chatxmeme"
   },
   {
-    id: 4,
+    id: 6,
     title: "Crypto Price Tracker",
     description: "Track cryptocurrency prices in real-time with live updates and charts.",
     img: "/cryptotracker.png",
@@ -45,7 +65,7 @@ const projects = [
     code: "https://github.com/jhalucky/Crypto-Price-Tracker",
   },
   {
-    id: 5,
+    id: 7,
     title: "Your City Weather",
     description: "Get accurate weather forecasts for any city worldwide.",
     img: "/weather.png",
@@ -55,7 +75,7 @@ const projects = [
     code: "https://github.com/jhalucky/Weather App",
   },
   {
-    id: 6,
+    id: 8,
     title: "DevPeek",
     description: "Explore GitHub profiles with a beautiful, modern interface.",
     img: "/Devpeek.png",
@@ -65,7 +85,7 @@ const projects = [
     code: "https://github.com/jhalucky/coca-cola-landingpage",
   },
   {
-    id: 7,
+    id: 9,
     title: "Cocacola Redesigned",
     description: "A modern redesign of the classic Coca-Cola landing page.",
     img: "/cocacola.png",
@@ -86,7 +106,7 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
     <div className="flex flex-col gap-8 projects-container">
       <h2 className="text-2xl sm:text-3xl font-bold tech-gradient">Projects</h2>
       <div className="grid gap-6 sm:grid-cols-2">
-        {visibleProjects.map((project, index) => (
+        {visibleProjects.map((project) => (
           <div
             key={project.id}
             className="project-card-wrapper group"
@@ -99,12 +119,12 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
             >
               {/* Project Image */}
               <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-900">
-                <img
+                <Image
                   src={project.img}
                   alt={project.title}
+                  fill
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
-                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
@@ -145,7 +165,7 @@ export default function Projects({ showAll = false }: { showAll?: boolean }) {
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, techIdx) => (
+                  {project.tech?.map((tech, techIdx) => (
                     <span
                       key={techIdx}
                       className="px-2.5 py-1 rounded text-xs font-medium border border-foreground/20 text-foreground/70 hover:border-cyan-500/50 hover:text-cyan-500 transition-colors duration-200"
