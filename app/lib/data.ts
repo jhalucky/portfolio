@@ -53,10 +53,19 @@ export const stack = [
 
 export const featuredProjects = [
   {
+    slug: "slugify",
+    title: "Slugify",
+    description: "A simple url shortener with a clean interface and powerful analytics dashboard.",
+    tech: ["Typescript", "Next.js", "Prisma", "PostgreSQL", "TailwindCSS"],
+    live: "https://slugify.luckyworks.in",
+    repo: "https://github.com/jhalucky/Slugify",
+    featured: true,
+  },
+  {
     slug: "inkspire",
     title: "InkSpire",
     description: "Write and read blogs and tip your favourite authors.",
-    tech: ["Next.js"],
+    tech: ["Next.js", "ORM", "ODM", "Payment Gateway"],
     live: "https://inkspire-yo.vercel.app",
     repo: "https://github.com/jhalucky/InkSpire",
     featured: true,
@@ -77,6 +86,15 @@ export const featuredProjects = [
     tech: ["Next.js", "TypeScript", "ORM"],
     live: "https://devorax.vercel.app",
     repo: "https://github.com/jhalucky/devoraX",
+    featured: true,
+  },
+  {
+    slug: "chatxmeme",
+    title: "ChatxMeme",
+    description: "A fake chat generator. Create realistic chat conversations for fun, pranks, or storytelling with an easy-to-use interface.",
+    tech: ["React", "Tailwind CSS", "OpenAI API"],
+    live: "https://chatxmeme.vercel.app",
+    repo: "https://github.com/jhalucky/chatxmeme",
     featured: true,
   },
   {
