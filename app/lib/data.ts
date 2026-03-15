@@ -106,6 +106,34 @@ export const featuredProjects = [
     repo: "https://github.com/jhalucky/meal-finder",
     featured: true,
   },
+  {
+    slug: "gitpeek",
+    title: "GitPeek",
+    description: "GitPeek is just a small web-app where user gets the github stats and summary of the profile of any developer.",
+    tech: ["React", "Tailwind CSS", "GitHub API", "API Fetching"],
+    live: "https://devpeek.vercel.app",
+    repo: "https://github.com/jhalucky/gitpeek",
+    featured: true,
+  },
+  {
+    slug: "nexus",
+    title: "Nexus",
+    description: "A modern landing page for Nexus with interactive elements and a clean design.",
+    tech: ["React", "Tailwind CSS"],
+    live: "https://yournexus.vercel.app",
+    repo: "https://github.com/jhalucky/Nexus",
+    featured: true,
+  },
+  {
+    slug: "cocacolalanding",
+    title: "Coca-Cola Landing Page",
+    description: "A modern landing page for Coca-Cola with interactive elements and a clean design.",
+    tech: ["React", "Tailwind CSS"],
+    live: "https://coca-cola-landingpage.vercel.app",
+    repo: "https://github.com/jhalucky/coca-cola-landing",
+    featured: true,
+  },
+
 ];
 
 export const blogPosts = [
