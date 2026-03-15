@@ -115,6 +115,12 @@ export default function Home() {
     <ProjectCard key={p.slug} project={p} />
   ))}
 </div>
+<div className="flex items-center justify-center mt-4 border border-[#1a1a1a] dark:border-[#1a1a1a] light:border-[#fafafa] rounded py-2 cursor-pointer hover:bg-[#ccc] hover:text-white transition-colors">
+   <Link href="/projects"
+            className="font-mono text-[0.62rem] text-[#282828] hover:text-[#888] transition-colors tracking-widest uppercase">
+            Show All Projects→
+    </Link>
+  </div>
       </section>
 
       {/* ── WRITING ── */}
