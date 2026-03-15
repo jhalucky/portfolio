@@ -14,8 +14,8 @@ interface Project {
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="group border border-[#1a1a1a] dark:border-[#1a1a1a] light:border-[#e8e8e8] bg-[#0d0d0d] hover:border-[#2e2e2e] transition-all duration-300 overflow-hidden
-      [html.light_&]:bg-white [html.light_&]:border-[#e8e8e8] [html.light_&]:hover:border-[#ccc] rounded-t">
+    <div className="group border-2 border-[#cecccc] bg-[#0d0d0d] hover:border-[#2e2e2e] transition-all duration-300 overflow-hidden
+      [html.light_&]:bg-white [html.light_&]:border-[#656565] [html.light_&]:hover:border-[#ccc] rounded-t">
 
       {/* Image — 16:9 */}
       <div className="relative w-full aspect-video overflow-hidden bg-[#111]

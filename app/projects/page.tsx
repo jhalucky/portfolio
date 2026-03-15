@@ -1,112 +1,81 @@
-import Link from "next/link";
+"use client";
+import { useState } from "react";
 import { featuredProjects } from "../lib/data";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Projects — Lucky Jha",
-};
+import ProjectCard from "../components/ProjectCard";
 
 export default function ProjectsPage() {
-  const featured = featuredProjects.filter((p) => p.featured);
-  const others = featuredProjects.filter((p) => !p.featured);
+  const [query, setQuery] = useState("");
+
+  const filtered = featuredProjects.filter((p) =>
+    query === "" ||
+    p.title.toLowerCase().includes(query.toLowerCase()) ||
+    p.description.toLowerCase().includes(query.toLowerCase()) ||
+    p.tech.some((t) => t.toLowerCase().includes(query.toLowerCase()))
+  );
 
   return (
-    <main className="max-w-[780px] mx-auto px-8 pt-24 pb-20">
+    <main className="max-w-[780px] mx-auto px-8 pt-24 pb-32">
 
       {/* Header */}
-      <div className="pt-12 pb-14 border-b border-[#111]">
+      <div className="pt-12 mb-10">
         <span className="font-mono text-[0.62rem] text-[#222] tracking-widest uppercase">
           {featuredProjects.length} projects
         </span>
-        <h1 className="font-display text-[3.5rem] italic text-white leading-none mt-3">
-          Things I&apos;ve<br />
-          <span className="text-[#1e1e1e]">Built</span>
+        <h1 className="font-display text-[3.5rem] italic text-[#1e1e1e] leading-none mt-2">
+          All Projects
         </h1>
+        <h2 className="text-#f5f5f5 font-display italic text-[3rem]">That I've worked on</h2>
       </div>
 
-      {/* Featured */}
-      <div className="mt-10 mb-16">
-        <span className="font-mono text-[0.6rem] text-[#1e1e1e] tracking-[0.2em] uppercase">
-          Featured
-        </span>
-        <div className="mt-6 space-y-0">
-          {featured.map((p, i) => (
-            <div key={p.slug}
-              className="group py-7 border-b border-[#0f0f0f] flex gap-5 items-start">
-              <span className="font-mono text-[0.6rem] text-[#1a1a1a] mt-1 flex-shrink-0 w-5">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="flex-1">
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <h2 className="font-display text-[1.15rem] italic text-[#888] group-hover:text-white transition-colors">
-                    {p.title}
-                  </h2>
-                  <div className="flex gap-4">
-                    {p.live && (
-                      <Link href={p.live} target="_blank"
-                        className="font-mono text-[0.6rem] text-[#222] hover:text-[#888] transition-colors tracking-widest uppercase">
-                        Live ↗
-                      </Link>
-                    )}
-                    {p.repo && (
-                      <Link href={p.repo} target="_blank"
-                        className="font-mono text-[0.6rem] text-[#222] hover:text-[#888] transition-colors tracking-widest uppercase">
-                        Code ↗
-                      </Link>
-                    )}
-                  </div>
-                </div>
-                <p className="text-[0.8rem] text-[#333] leading-relaxed mb-3">{p.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {p.tech.map((t) => <span key={t} className="tech-tag">{t}</span>)}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* Search */}
+      <div className="relative mb-10">
+        <svg
+          className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#2a2a2a]"
+          width="14" height="14" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search projects..."
+          className="w-full bg-[#0d0d0d] border border-[#1a1a1a] text-[#888] placeholder-[#2a2a2a]
+            font-mono text-[0.78rem] tracking-wide pl-9 pr-4 py-3 rounded-xl outline-none
+            focus:border-[#2e2e2e] focus:text-[#ccc] transition-all duration-200
+            [html.light_&]:bg-white [html.light_&]:border-[#e8e8e8] [html.light_&]:text-[#555]
+            [html.light_&]:placeholder-[#ccc] [html.light_&]:focus:border-[#bbb]"
+        />
+        {query && (
+          <button
+            onClick={() => setQuery("")}
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#2a2a2a] hover:text-[#888] transition-colors font-mono text-xs">
+            ✕
+          </button>
+        )}
       </div>
 
-      {/* Others */}
-      <div>
-        <span className="font-mono text-[0.6rem] text-[#1e1e1e] tracking-[0.2em] uppercase">
-          Other Projects
-        </span>
-        <div className="mt-6 space-y-0">
-          {others.map((p, i) => (
-            <div key={p.slug}
-              className="group py-6 border-b border-[#0f0f0f] flex gap-5 items-start">
-              <span className="font-mono text-[0.6rem] text-[#1a1a1a] mt-1 flex-shrink-0 w-5">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="flex-1">
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <h2 className="font-display text-[1rem] italic text-[#555] group-hover:text-[#aaa] transition-colors">
-                    {p.title}
-                  </h2>
-                  <div className="flex gap-4">
-                    {p.live && (
-                      <Link href={p.live} target="_blank"
-                        className="font-mono text-[0.6rem] text-[#222] hover:text-[#888] transition-colors tracking-widest uppercase">
-                        Live ↗
-                      </Link>
-                    )}
-                    {p.repo && (
-                      <Link href={p.repo} target="_blank"
-                        className="font-mono text-[0.6rem] text-[#222] hover:text-[#888] transition-colors tracking-widest uppercase">
-                        Code ↗
-                      </Link>
-                    )}
-                  </div>
-                </div>
-                <p className="text-[0.8rem] text-[#2e2e2e] leading-relaxed mb-3">{p.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {p.tech.map((t) => <span key={t} className="tech-tag">{t}</span>)}
-                </div>
-              </div>
-            </div>
+      {/* Results count when searching */}
+      {query && (
+        <p className="font-mono text-[0.62rem] text-[#2a2a2a] tracking-widest uppercase mb-6">
+          {filtered.length} result{filtered.length !== 1 ? "s" : ""} for &quot;{query}&quot;
+        </p>
+      )}
+
+      {/* Grid */}
+      {filtered.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {filtered.map((p) => (
+            <ProjectCard key={p.slug} project={p} />
           ))}
         </div>
-      </div>
+      ) : (
+        <div className="text-center py-20">
+          <p className="font-mono text-[0.7rem] text-[#222] tracking-widest">
+            No projects found for &quot;{query}&quot;
+          </p>
+        </div>
+      )}
 
     </main>
   );
