@@ -4,6 +4,7 @@ import TechMarquee from "./components/TechMarquee";
 import ContribGraph from "./components/ContribGraph";
 import Timer from "./components/Timer";
 import ProjectCard from "./components/ProjectCard"; 
+import ContactForm from "./components/ContactForm";
 
 
 export default function Home() {
@@ -157,6 +158,9 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* ── CONTACT ── */}
+      <ContactForm />
 
     </main>
   );
