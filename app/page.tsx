@@ -1,3 +1,5 @@
+
+
 import Link from "next/link";
 import { bio, featuredProjects, blogPosts, stack } from "./lib/data";
 import TechMarquee from "./components/TechMarquee";
@@ -12,7 +14,7 @@ export default function Home() {
   const recentPosts = blogPosts.slice(0, 3);
 
   return (
-    <main className="max-w-[780px] mx-auto px-8 pt-24 pb-20">
+    <main className="max-w-[780px] mx-auto px-8 pt-14 pb-20">
 
       {/* ── HERO ── */}
       <section className="pt-12 pb-20">
@@ -30,18 +32,35 @@ export default function Home() {
           </span>
         </div>
 
+
         {/* Main headline — big, asymmetric */}
-        <div className="mb-10">
-          <h1 className="font-display text-[4.5rem] leading-[0.95] tracking-tight text-#f5f5f5 mb-0 italic">
-            Lucky Jha
-          </h1>
-          <div className="flex items-end gap-4 mt-3">
-            <span className="font-display text-[4.5rem] leading-[0.95] text-[#1e1e1e] italic">20</span>
-            <span className="font-mono text-[0.65rem] text-[#2e2e2e] tracking-widest mb-2 uppercase">
-              — Full-Stack Developer
-            </span>
-          </div>
-        </div>
+  <div className="mb-1 p-6 rounded-2xl flex flex-col-reverse sm:flex-row sm:items-end sm:justify-between gap-6">
+
+  {/* Text */}
+  <div>
+    <h1 className="font-display text-[2.5rem] sm:text-[4.5rem] leading-[0.95] tracking-tight italic text-#fafafa">
+      Lucky Jha<span>, </span><span className="sm:block">20</span>
+    </h1>
+    <div className="flex items-end gap-3 mt-2">
+      <span className="font-display text-[3.5rem] sm:text-[4.5rem] leading-[0.95] italic text-#f5f5f5 hidden">
+        20
+      </span>
+      <span className="font-mono text-[0.62rem] tracking-widest uppercase mb-2 text-[#464646] hidden sm:inline">
+        — Full-Stack Developer
+      </span>
+    </div>
+  </div>
+
+  {/* Photo */}
+  <div className="w-full sm:w-[180px] aspect-square sm:aspect-auto sm:h-[180px] flex-shrink-0">
+    <img
+      src="/me.png"
+      alt="Lucky Jha"
+      className="w-full h-full object-cover rounded-sm -rotate-3 shadow-lg"
+    />
+  </div>
+
+</div>
 
         {/* One-liner */}
         <p className="text-[1rem] text-[#555] max-w-[480px] leading-relaxed mb-10 font-light">
@@ -49,7 +68,7 @@ export default function Home() {
         </p>
 
         {/* Photo + bio grid */}
-        <div className="grid grid-cols-[1fr_140px] gap-8 items-start">
+        <div className="grid gap-8 items-start">
           <div className="space-y-4">
             {bio.description.map((p, i) => (
               <p key={i} className="text-[0.82rem] text-[#444] leading-relaxed"
@@ -62,13 +81,6 @@ export default function Home() {
                 Let&apos;s talk.
               </Link>
             </p>
-          </div>
-
-          {/* Photo placeholder */}
-          <div className="w-[140px] h-[168px] border border-[#161616] bg-[#0d0d0d] flex items-end p-2">
-            <span className="font-mono text-[0.55rem] text-[#1e1e1e] tracking-widest uppercase leading-relaxed">
-              Photo<br/>soon
-            </span>
           </div>
         </div>
 
