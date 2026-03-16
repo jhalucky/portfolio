@@ -6,8 +6,7 @@ export default async function ContribGraph() {
 
   if (weeks.length === 0) return null;
 
-  // Show last 26 weeks for compact display
-  const displayWeeks = weeks.slice(-26);
+  const displayWeeks = weeks;
 
   return (
     <div>
@@ -20,7 +19,7 @@ export default async function ContribGraph() {
         </span>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto pb-2">
         <div className="contrib-grid min-w-max">
           {displayWeeks.map((week, wi) => (
             <div key={wi} className="contrib-week">

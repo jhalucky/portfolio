@@ -5,7 +5,10 @@ import { useEffect, useState } from "react";
 
 export default function DockNav() {
   const path = usePathname();
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(() => {
+  if (typeof window === "undefined") return false;
+  return localStorage.getItem("theme") === "dark";
+});
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");

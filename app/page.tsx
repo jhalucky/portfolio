@@ -124,7 +124,7 @@ export default function Home() {
   </div>
       </section>
 
-      {/* ── WRITING ── */}
+      {/* ── WRITING ──
       <section className="mb-20">
         <div className="flex items-baseline justify-between mb-8">
           <SectionHeader index="04" label="Writing" />
@@ -157,7 +157,7 @@ export default function Home() {
             </Link>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ── CONTACT ── */}
       <ContactForm />

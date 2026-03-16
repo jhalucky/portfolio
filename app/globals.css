@@ -132,3 +132,9 @@ html.light .p-card {
   border-color: #e8e8e8;
   background: #fff;
 }
+
+html.light .contrib-day                  { background: #e8e8e8; }
+html.light .contrib-day[data-level="1"]  { background: #bdbdbd; }
+html.light .contrib-day[data-level="2"]  { background: #868686; }
+html.light .contrib-day[data-level="3"]  { background: #4a4a4a; }
+html.light .contrib-day[data-level="4"]  { background: #0a0a0a; }
