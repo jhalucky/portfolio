@@ -1,43 +1,90 @@
-export interface ContribDay {
+type GithubContributionDay = {
+  contributionCount: number;
+  contributionLevel:
+    | "NONE"
+    | "FIRST_QUARTILE"
+    | "SECOND_QUARTILE"
+    | "THIRD_QUARTILE"
+    | "FOURTH_QUARTILE";
   date: string;
-  count: number;
-  level: 0 | 1 | 2 | 3 | 4;
-}
+};
 
-export interface GithubStats {
-  totalContributions: number;
-  weeks: { days: ContribDay[] }[];
-}
+type GithubWeek = {
+  contributionDays: GithubContributionDay[];
+};
 
-export async function getGithubContributions(username: string): Promise<GithubStats> {
-  try {
-    // Using the unofficial GitHub contributions API
-    const res = await fetch(
-      `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
-      { next: { revalidate: 3600 } } // cache for 1 hour
-    );
+const LEVEL_MAP = {
+  NONE: 0,
+  FIRST_QUARTILE: 1,
+  SECOND_QUARTILE: 2,
+  THIRD_QUARTILE: 3,
+  FOURTH_QUARTILE: 4,
+} as const;
 
-    if (!res.ok) throw new Error("Failed to fetch contributions");
+export async function getGithubContributions(username: string) {
+  const token = process.env.GITHUB_TOKEN;
 
-    const data = await res.json();
-
-    // Build weeks from flat contributions array
-    const contribs: { date: string; count: number; level: number }[] = data.contributions ?? [];
-
-    // Group into weeks of 7
-    const weeks: { days: ContribDay[] }[] = [];
-    for (let i = 0; i < contribs.length; i += 7) {
-      weeks.push({
-        days: contribs.slice(i, i + 7).map((d) => ({
-          date: d.date,
-          count: d.count,
-          level: Math.min(d.level, 4) as 0 | 1 | 2 | 3 | 4,
-        })),
-      });
-    }
-
-    return { totalContributions: data.total?.lastYear ?? 0, weeks };
-  } catch {
-    return { totalContributions: 0, weeks: [] };
+  if (!token) {
+    throw new Error("Missing GITHUB_TOKEN");
   }
+
+  const query = `
+    query($username: String!) {
+      user(login: $username) {
+        contributionsCollection {
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays {
+                contributionCount
+                contributionLevel
+                date
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const res = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({
+      query,
+      variables: {
+        username,
+      },
+    }),
+
+    next: {
+      revalidate: 3600,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("GitHub GraphQL request failed.");
+  }
+
+  const json = await res.json();
+
+  const calendar =
+    json.data.user.contributionsCollection.contributionCalendar;
+
+  return {
+    totalContributions: calendar.totalContributions,
+
+    weeks: calendar.weeks.map((week: GithubWeek) => ({
+      days: week.contributionDays.map((day) => ({
+        date: day.date,
+        count: day.contributionCount,
+        level: LEVEL_MAP[day.contributionLevel],
+      })),
+    })),
+  };
 }

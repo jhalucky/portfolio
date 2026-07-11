@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { featuredProjects } from "../lib/data";
+import { featuredProjects } from "@/app/data/projects";
 import ProjectCard from "../components/ProjectCard";
 
 export default function ProjectsPage() {

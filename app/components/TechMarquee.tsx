@@ -1,4 +1,4 @@
-import { stack } from "../lib/data";
+import { stack } from "@/app/data/stack";
 
 export default function TechMarquee() {
   const doubled = [...stack, ...stack];

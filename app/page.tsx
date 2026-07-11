@@ -1,7 +1,9 @@
 
 
 import Link from "next/link";
-import { bio, featuredProjects, blogPosts, stack } from "./lib/data";
+import { bio } from "@/app/data/bio";
+import { featuredProjects } from "@/app/data/projects";
+import { stack } from "@/app/data/stack";
 import TechMarquee from "./components/TechMarquee";
 import ContribGraph from "./components/ContribGraph";
 import Timer from "./components/Timer";
@@ -11,7 +13,7 @@ import ContactForm from "./components/ContactForm";
 
 export default function Home() {
   const featured = featuredProjects.filter((p) => p.featured).slice(0, 4);
-  const recentPosts = blogPosts.slice(0, 3);
+ 
 
   return (
     <main className="max-w-[780px] mx-auto px-8 pt-14 pb-20">

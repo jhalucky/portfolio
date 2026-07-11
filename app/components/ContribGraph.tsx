@@ -1,5 +1,5 @@
-import { getGithubContributions } from "../lib/github";
-import { GITHUB_USERNAME } from "../lib/data";
+import { getGithubContributions } from "@/app/lib/github";
+import { GITHUB_USERNAME } from "@/app/data/bio";
 
 export default async function ContribGraph() {
   const { totalContributions, weeks } = await getGithubContributions(GITHUB_USERNAME);
@@ -21,9 +21,9 @@ export default async function ContribGraph() {
 
       <div className="overflow-x-auto pb-2">
         <div className="contrib-grid min-w-max">
-          {displayWeeks.map((week, wi) => (
+          {displayWeeks.map((week: typeof weeks[number], wi: number) => (
             <div key={wi} className="contrib-week">
-              {week.days.map((day, di) => (
+              {week.days.map((day: typeof week.days[number], di: number) => (
                 <div
                   key={di}
                   className="contrib-day"
