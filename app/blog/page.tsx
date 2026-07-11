@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { getPublishedBlogs } from "@/app/services/blog.service";
 import type { Blog } from "@/app/types/blog";
@@ -40,44 +41,58 @@ export default async function BlogPage() {
             <Link
               key={post.id}
               href={`/blog/${post.slug}`}
-              className="blog-row group flex items-start gap-6 py-6"
+              className="blog-row block group py-8 border-b border-[#111]"
             >
-              {/* Date */}
-              <div className="flex-shrink-0 w-24">
-                <span className="font-mono text-[0.6rem] text-[#1e1e1e] leading-relaxed">
-                  {new Date(post.createdAt).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })}
+              {/* Cover Image */}
+              {post.coverImage && (
+                <div className="relative w-full aspect-video mb-6 overflow-hidden rounded">
+                  <Image
+                    src={post.coverImage}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+              )}
+
+              <div className="flex items-start gap-6">
+                {/* Date */}
+                <div className="flex-shrink-0 w-24">
+                  <span className="font-mono text-[0.6rem] text-[#1e1e1e] leading-relaxed">
+                    {new Date(post.createdAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-[0.92rem] text-[#3a3a3a] group-hover:text-[#ccc] transition-colors mb-2 leading-snug">
+                    {post.title}
+                  </h2>
+
+                  <p className="text-[0.78rem] text-[#262626] leading-relaxed mb-3 line-clamp-2">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-mono text-[0.58rem] text-[#1e1e1e]"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Read Time */}
+                <span className="font-mono text-[0.6rem] text-[#1a1a1a] flex-shrink-0 mt-0.5">
+                  {post.readTime}
                 </span>
               </div>
-
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <h2 className="text-[0.92rem] text-[#3a3a3a] group-hover:text-[#ccc] transition-colors mb-2 leading-snug">
-                  {post.title}
-                </h2>
-
-                <p className="text-[0.78rem] text-[#262626] leading-relaxed mb-3 line-clamp-2">
-                  {post.excerpt}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="font-mono text-[0.58rem] text-[#1e1e1e]"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Read Time */}
-              <span className="font-mono text-[0.6rem] text-[#1a1a1a] flex-shrink-0 mt-0.5">
-                {post.readTime}
-              </span>
             </Link>
           ))
         )}

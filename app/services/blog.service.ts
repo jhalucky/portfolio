@@ -59,3 +59,11 @@ export async function deleteBlog(id: string) {
     },
   });
 }
+
+export async function getBlogById(id: string) {
+  return prisma.blog.findUnique({
+    where: {
+      id,
+    },
+  });
+}

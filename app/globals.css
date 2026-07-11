@@ -42,6 +42,32 @@ body {
   margin: 1.5rem -4rem;
 }
 
+/* UploadThing */
+
+.ut-label {
+    font-family: inherit !important;
+}
+
+.ut-allowed-content {
+    display: none !important;
+}
+
+.ut-upload-icon {
+    color: #666 !important;
+}
+
+.ut-button {
+    display: none !important;
+}
+
+.ut-uploading {
+    border-color: #444 !important;
+}
+
+.ut-ready {
+    border-color: #222 !important;
+}
+
 /* ---- REVEAL ---- */
 .reveal {
   opacity: 0;
